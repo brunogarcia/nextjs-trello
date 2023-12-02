@@ -47,17 +47,17 @@ SHOW TABLES;
 To access the Prisma Studio, run:
 
 ```bash
-npx run prisma studio
+npm run prisma:studio
 ```
 
 To generate the Prisma client, run:
 
 ```bash
-npx prisma generate
+npm run prisma:generate
 ```
 
 To update the database schema, run:
 
 ```bash
-npx prisma db push
+npm run prisma:db:push
 ```
