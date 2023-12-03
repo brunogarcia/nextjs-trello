@@ -7,7 +7,7 @@ import { db } from "@/lib/db";
 import { createSafeAction } from "@/lib/create-safe-action";
 
 import { InputType, ReturnType } from "./types";
-import { CreateBoard } from "./schema";
+import { CreateBoardSchema } from "./schema";
 
 const handler = async (data: InputType): Promise<ReturnType> => {
   const { userId, orgId } = auth();
@@ -59,4 +59,4 @@ const handler = async (data: InputType): Promise<ReturnType> => {
   return { data: board };
 };
 
-export const createBoard = createSafeAction(CreateBoard, handler);
+export const createBoard = createSafeAction(CreateBoardSchema, handler);
