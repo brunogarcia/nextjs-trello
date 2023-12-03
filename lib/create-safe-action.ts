@@ -5,16 +5,20 @@ export type FieldErrors<T> = {
 };
 
 export type ActionState<TInput, TOutput> = {
-  fieldErrors?: FieldErrors<TInput>;
-  error?: string | null;
   data?: TOutput;
+  error?: string | null;
+  fieldErrors?: FieldErrors<TInput>;
 };
+
+export type ActionCallback<Input, Output> = (
+  data: Input
+) => Promise<ActionState<Input, Output>>;
 
 export const createSafeAction = <TInput, TOutput>(
   schema: z.Schema<TInput>,
-  handler: (validatedData: TInput) => Promise<ActionState<TInput, TOutput>>
+  handler: ActionCallback<TInput, TOutput>
 ) => {
-  return async (data: TInput): Promise<ActionState<TInput, TOutput>> => {
+  return async (data: TInput) => {
     const validationResult = schema.safeParse(data);
     if (!validationResult.success) {
       return {
