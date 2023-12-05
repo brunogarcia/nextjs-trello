@@ -8,9 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "prisma:studio": "prisma studio",
+    "prisma:reset": "prisma migrate reset",
     "prisma:generate": "prisma generate",
-    "prisma:push": "prisma db push",
-    "prisma:reset": "prisma migrate reset"
+    "prisma:push": "prisma db push"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.27.2",
