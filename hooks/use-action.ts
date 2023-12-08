@@ -2,9 +2,25 @@ import { useState, useCallback } from "react";
 
 import { ActionCallback, FieldErrors } from "@/lib/create-safe-action";
 
+/**
+ * Options for the useAction hook.
+ */
 interface UseActionOptions<TOutput> {
+  /**
+   * Callback function to be called when the action is successful.
+   * @param data - The output data of the action.
+   */
   onSuccess?: (data: TOutput) => void;
+
+  /**
+   * Callback function to be called when an error occurs during the action.
+   * @param error - The error message.
+   */
   onError?: (error: string) => void;
+
+  /**
+   * Callback function to be called when the action is completed, regardless of success or failure.
+   */
   onComplete?: () => void;
 }
 
@@ -26,7 +42,13 @@ interface UseActionOptions<TOutput> {
 export const useAction = <TInput, TOutput>(
   action: ActionCallback<TInput, TOutput>,
   options: UseActionOptions<TOutput> = {}
-) => {
+): {
+  execute: (input: TInput) => Promise<void>;
+  data: TOutput | undefined;
+  error: string | undefined;
+  fieldErrors: FieldErrors<TInput> | undefined;
+  isLoading: boolean;
+} => {
   const [fieldErrors, setFieldErrors] = useState<
     FieldErrors<TInput> | undefined
   >(undefined);
