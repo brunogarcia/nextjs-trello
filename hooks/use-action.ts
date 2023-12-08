@@ -8,6 +8,21 @@ interface UseActionOptions<TOutput> {
   onComplete?: () => void;
 }
 
+/**
+ * Custom hook that executes an action and manages its state.
+ *
+ * @template TInput The type of the input parameter for the action.
+ * @template TOutput The type of the output result from the action.
+ * @param {ActionCallback<TInput, TOutput>} action The action to be executed.
+ * @param {UseActionOptions<TOutput>} [options={}] The options for the hook.
+ * @returns {{
+ *   execute: (input: TInput) => Promise<void>,
+ *   data: TOutput | undefined,
+ *   error: string | undefined,
+ *   fieldErrors: FieldErrors<TInput> | undefined,
+ *   isLoading: boolean
+ * }} The hook object with the execute function and the state variables.
+ */
 export const useAction = <TInput, TOutput>(
   action: ActionCallback<TInput, TOutput>,
   options: UseActionOptions<TOutput> = {}

@@ -1,5 +1,4 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// https://pris.ly/d/prisma-schema
 
 generator client {
   provider = "prisma-client-js"
@@ -11,49 +10,98 @@ datasource db {
   relationMode = "prisma"
 }
 
+/// Represents a board in the Trello application.
 model Board {
+  // The unique identifier of the board.
   id            String @id @default(uuid())
+
+  // The organization ID that the board belongs to.
   orgId         String
+
+  // The title of the board.
   title         String
+
+  // The ID of the image associated with the board.
   imageId       String
+
+  // The thumbnail URL of the image associated with the board.
   imageThumbUrl String @db.Text
+
+  // The full URL of the image associated with the board.
   imageFullUrl  String @db.Text
+
+  // The username of the image owner.
   imageUserName String @db.Text
+
+  // The HTML code for embedding the image in a webpage.
   imageLinkHTML String @db.Text
 
+  // The lists associated with the board.
   lists         List[]
 
+  // The timestamp when the board was created.
   createdAt     DateTime @default(now())
+
+  // The timestamp when the board was last updated.
   updatedAt     DateTime @updatedAt
 }
 
+/// Represents a list in the Trello application.
 model List {
+  /// The unique identifier of the list.
   id        String @id @default(uuid())
+
+  /// The title of the list.
   title     String
+
+  /// The order of the list.
   order     Int
 
+  /// The ID of the board that this list belongs to.
   boardId   String
+
+  /// The board that this list belongs to.
   board     Board  @relation(fields: [boardId], references: [id], onDelete: Cascade)
 
+  /// The cards associated with this list.
   cards     Card[]
 
+  /// The timestamp when the list was created.
   createdAt     DateTime @default(now())
+
+  /// The timestamp when the list was last updated.
   updatedAt     DateTime @updatedAt
 
+  /// Index for efficient querying of lists by boardId.
   @@index([boardId])
 }
 
+/// Represents a card in a Trello board.
 model Card {
+  /// The unique identifier of the card.
   id        String @id @default(uuid())
+
+  /// The title of the card.
   title     String
+
+  /// The order of the card within its list.
   order     Int
+
+  /// The description of the card (optional).
   description String? @db.Text
 
+  /// The ID of the list that the card belongs to.
   listId    String
+
+  /// The list that the card belongs to.
   list      List   @relation(fields: [listId], references: [id], onDelete: Cascade)
 
+  /// The timestamp when the card was created.
   createdAt     DateTime @default(now())
+
+  /// The timestamp when the card was last updated.
   updatedAt     DateTime @updatedAt
 
+  /// Index for efficient querying of cards by listId.
   @@index([listId])
 }

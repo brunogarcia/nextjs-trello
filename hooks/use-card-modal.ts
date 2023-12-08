@@ -7,6 +7,10 @@ type CardModalStore = {
   onClose: () => void;
 };
 
+/**
+ * Custom hook for managing the card modal state.
+ * @returns An object containing the card modal state and methods to manipulate it.
+ */
 export const useCardModal = create<CardModalStore>((set) => ({
   id: undefined,
   isOpen: false,

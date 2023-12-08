@@ -6,6 +6,9 @@ type MobileSidebarStore = {
   onClose: () => void;
 };
 
+/**
+ * Custom hook for managing the state of a mobile sidebar.
+ */
 export const useMobileSidebar = create<MobileSidebarStore>((set) => ({
   isOpen: false,
   onOpen: () => set({ isOpen: true }),

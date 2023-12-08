@@ -6,6 +6,9 @@ type ProModalStore = {
   onClose: () => void;
 };
 
+/**
+ * Custom hook for managing a professional modal.
+ */
 export const useProModal = create<ProModalStore>((set) => ({
   isOpen: false,
   onOpen: () => set({ isOpen: true }),
