@@ -118,17 +118,38 @@ enum ENTITY_TYPE {
   CARD
 }
 
+/// Represents an audit log entry in the system.
 model AuditLog {
+  /// The unique identifier of the audit log entry.
   id          String  @id @default(uuid())
+
+  /// The organization ID associated with the audit log entry.
   orgId       String
+
+  /// The action performed in the audit log entry.
   action      ACTION
+
+  /// The ID of the entity associated with the audit log entry.
   entityId    String
+
+  /// The type of the entity associated with the audit log entry.
   entityType  ENTITY_TYPE
+
+  /// The title of the entity associated with the audit log entry.
   entityTitle String
+
+  /// The ID of the user associated with the audit log entry.
   userId      String
+
+  /// The image URL of the user associated with the audit log entry.
   userImage   String @db.Text
+
+  /// The name of the user associated with the audit log entry.
   userName    String @db.Text
 
+  /// The timestamp when the audit log entry was created.
   createdAt   DateTime @default(now())
+
+  /// The timestamp when the audit log entry was last updated.
   updatedAt   DateTime  @updatedAt
 }
