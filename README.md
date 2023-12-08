@@ -77,3 +77,7 @@ To reset the database, run:
 ```bash
 npm run prisma:reset
 ```
+
+### How are work the actions?
+
+![Next Actions](./docs/how-are-work-the-actions.png)
